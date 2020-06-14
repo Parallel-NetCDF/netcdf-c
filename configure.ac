@@ -672,6 +672,7 @@ fi
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_C_CONST
+AC_PROG_CXX
 
 # CURLOPT_USERNAME is not defined until curl version 7.19.1
 # CURLOPT_PASSWORD is not defined until curl version 7.19.1

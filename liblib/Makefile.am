@@ -11,7 +11,7 @@ include $(top_srcdir)/lib_flags.am
 
 # This is our output, the netcdf library the user will install.
 lib_LTLIBRARIES = libnetcdf.la
-
+nodist_EXTRA_libnetcdf_la_SOURCES = $(top_srcdir)/dummy.cpp
 ##
 # These linker flags specify libtool version info.
 # See http://www.gnu.org/software/libtool/manual/libtool.html#Libtool-versioning

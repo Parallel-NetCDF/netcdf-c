@@ -60,6 +60,7 @@
 /** Struct to hold HDF5-specific info for the file. */
 typedef struct NC_HDF5_FILE_INFO {
    hid_t hdfid;
+   hid_t vlid;
 #ifdef ENABLE_BYTERANGE
    struct HTTP {
 	NCURI* uri; /* Parse of the incoming path, if url */

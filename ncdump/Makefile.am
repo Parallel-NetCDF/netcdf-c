@@ -22,13 +22,13 @@ XFAIL_TESTS=""
 bin_PROGRAMS = ncdump
 ncdump_SOURCES = ncdump.c vardata.c dumplib.c indent.c nctime0.c        \
 ncdump.h vardata.h dumplib.h indent.h isnan.h nctime0.h cdl.h utils.h   \
-utils.c nciter.h nciter.c nccomps.h
+utils.c nciter.h nciter.c nccomps.h $(top_srcdir)/dummy.cpp
 
 # Another utility program that copies any netCDF file using only the
 # netCDF API
 bin_PROGRAMS += nccopy
 nccopy_SOURCES = nccopy.c nciter.c nciter.h chunkspec.h chunkspec.c     \
-utils.h utils.c dimmap.h dimmap.c list.c list.h
+utils.h utils.c dimmap.h dimmap.c list.c list.h $(top_srcdir)/dummy.cpp
 
 # Wei-keng Liao's (wkliao@eecs.northwestern.edu)
 # netcdf-3 validator program
@@ -41,13 +41,13 @@ ncvalidator_SOURCES = ncvalidator.c
 # A simple netcdf-4 metadata -> xml printer. Do not install.
 if USE_HDF5
 noinst_PROGRAMS += nc4print
-nc4print_SOURCES = nc4print.c
+nc4print_SOURCES = nc4print.c $(top_srcdir)/dummy.cpp
 endif
 
 # Conditionally build the ocprint program, but do not install
 if ENABLE_DAP
 noinst_PROGRAMS += ocprint
-ocprint_SOURCES = ocprint.c
+ocprint_SOURCES = ocprint.c $(top_srcdir)/dummy.cpp
 endif
 
 # This is the man page.

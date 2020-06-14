@@ -15,7 +15,7 @@ semantics.c dump.c util.c bytebuffer.c list.c data.h		\
 debug.h generr.h genlib.h includes.h ncgen.h odom.h  dump.h	\
 util.h bytebuffer.h list.h genf77.c f77data.c genj.c jdata.c nc_iter.h	\
 nc_iter.c \
-ncgeny.c ncgeny.h
+ncgeny.c ncgeny.h $(top_srcdir)/dummy.cpp
 
 # This is the man page.
 man_MANS = ncgen.1

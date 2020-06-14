@@ -275,6 +275,7 @@ nc4_close_netcdf4_file(NC_FILE_INFO_T *h5, int abort, NC_memio *memio)
         dumpopenobjects(h5);
         return NC_EHDFERR;
     }
+    H5VLclose(hdf5_info->vlid);
 
     /* If inmemory is used and user wants the final memory block,
        then capture and return the final memory block else free it */

@@ -10,6 +10,7 @@
 
 #include "config.h"
 #include "hdf5internal.h"
+#include <logvol.h>
 
 /* From hdf5file.c. */
 extern size_t nc4_chunk_cache_size;
@@ -146,6 +147,11 @@ nc4_create_file(const char *path, int cmode, size_t initialsz,
             /* No dup, just copy it. */
             nc4_info->info = info;
         }
+
+        /* Set logio VOL */
+        hdf5_info->vlid = H5VLregister_connector(&H5VL_log_g, H5P_DEFAULT); 
+        H5Pset_all_coll_metadata_ops(fapl_id, 1);   
+        H5Pset_vol(fapl_id, hdf5_info->vlid, NULL);   
     }
 #else /* only set cache for non-parallel... */
     if (H5Pset_cache(fapl_id, 0, nc4_chunk_cache_nelems, nc4_chunk_cache_size,

@@ -13,7 +13,7 @@ ncgen3_LDADD = ${top_builddir}/liblib/libnetcdf.la
 # Build ncgen from the listed sources.
 bin_PROGRAMS = ncgen3
 ncgen3_SOURCES = main.c load.c escapes.c getfill.c init.c	\
-genlib.c generic.h ncgen.h genlib.h ncgentab.h ncgentab.c
+genlib.c generic.h ncgen.h genlib.h ncgentab.h ncgentab.c $(top_srcdir)/dummy.cpp
 
 man_MANS = ncgen3.1
 

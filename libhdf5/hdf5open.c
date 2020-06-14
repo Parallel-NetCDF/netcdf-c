@@ -14,6 +14,8 @@
 #include "ncrc.h"
 #include "ncmodel.h"
 
+#include <logvol.h>
+
 #ifdef ENABLE_BYTERANGE
 #include "H5FDhttp.h"
 #endif
@@ -753,6 +755,11 @@ nc4_open_file(const char *path, int mode, void* parameters, int ncid)
             /* No dup, just copy it. */
             nc4_info->info = mpiinfo->info;
         }
+
+        /* Set logio VOL */
+        h5->vlid = H5VLregister_connector(&H5VL_log_g, H5P_DEFAULT); 
+        H5Pset_all_coll_metadata_ops(fapl_id, 1);   
+        H5Pset_vol(fapl_id, h5->vlid, NULL);   
     }
 
 #ifdef HDF5_HAS_COLL_METADATA_OPS

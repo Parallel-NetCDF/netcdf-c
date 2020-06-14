@@ -530,6 +530,10 @@ CFLAGS = @CFLAGS@
 CONFIG_DATE = @CONFIG_DATE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CXX = @CXX@
+CXXCPP = @CXXCPP@
+CXXDEPMODE = @CXXDEPMODE@
+CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
@@ -652,6 +656,7 @@ abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
+ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
@@ -692,6 +697,7 @@ pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
+runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
@@ -722,8 +728,8 @@ tst_ar4_SOURCES = tst_ar4.c tst_utils.c
 tst_h_many_atts_SOURCES = tst_h_many_atts.c tst_utils.c
 tst_knmi_SOURCES = tst_knmi.c tst_utils.c
 tst_wrf_reads_SOURCES = tst_wrf_reads.c tst_utils.c
-EXTRA_DIST = run_par_bm_test.sh.in run_knmi_bm.sh	\
-perftest.sh run_bm_test1.sh run_bm_test2.sh \
+EXTRA_DIST = run_par_bm_test.sh.in run_knmi_bm.sh perftest.sh		\
+run_bm_test1.sh run_bm_test2.sh run_tst_chunks.sh run_bm_elena.sh	\
 CMakeLists.txt
 
 CLEANFILES = tst_*.nc bigmeta.nc bigvars.nc floats*.nc	\
