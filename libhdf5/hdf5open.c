@@ -659,6 +659,7 @@ nc4_open_file(const char *path, int mode, void* parameters, int ncid)
     NC_HDF5_FILE_INFO_T *h5 = NULL;
     NC *nc;
     hid_t fapl_id = H5P_DEFAULT;
+    hid_t vlid = -1;
     unsigned flags;
     int is_classic;
 #ifdef USE_PARALLEL4
@@ -667,6 +668,12 @@ nc4_open_file(const char *path, int mode, void* parameters, int ncid)
     int info_duped = 0; /* Whether the MPI Info object was duplicated */
 #endif
     int retval;
+
+    // The log VOL will change the structure of H5P_FILE_ACCESS and H5P_DATASET_XFER property classes.
+    // In consequence, existing property will be seen as a different property class and 
+    // fail the isaclass test
+    // Need to innit the log VOL before creating any property
+    vlid = H5VLregister_connector(&H5VL_log_g, H5P_DEFAULT); 
 
     LOG((3, "%s: path %s mode %d", __func__, path, mode));
     assert(path);
@@ -757,7 +764,7 @@ nc4_open_file(const char *path, int mode, void* parameters, int ncid)
         }
 
         /* Set logio VOL */
-        h5->vlid = H5VLregister_connector(&H5VL_log_g, H5P_DEFAULT); 
+        h5->vlid = vlid;
         H5Pset_all_coll_metadata_ops(fapl_id, 1);   
         H5Pset_vol(fapl_id, h5->vlid, NULL);   
     }

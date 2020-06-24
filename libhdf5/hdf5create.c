@@ -45,6 +45,7 @@ nc4_create_file(const char *path, int cmode, size_t initialsz,
                 void* parameters, int ncid)
 {
     hid_t fcpl_id, fapl_id = -1;
+    hid_t vlid = -1;
     unsigned flags;
     FILE *fp;
     int retval = NC_NOERR;
@@ -59,7 +60,13 @@ nc4_create_file(const char *path, int cmode, size_t initialsz,
     int comm_duped = 0; /* Whether the MPI Communicator was duplicated */
     int info_duped = 0; /* Whether the MPI Info object was duplicated */
 #endif /* !USE_PARALLEL4 */
-
+    
+    // The log VOL will change the structure of H5P_FILE_ACCESS and H5P_DATASET_XFER property classes.
+    // In consequence, existing property will be seen as a different property class and 
+    // fail the isaclass test
+    // Need to innit the log VOL before creating any property
+    vlid = H5VLregister_connector(&H5VL_log_g, H5P_DEFAULT); 
+    
     assert(path);
     LOG((3, "%s: path %s mode 0x%x", __func__, path, cmode));
 
@@ -149,7 +156,7 @@ nc4_create_file(const char *path, int cmode, size_t initialsz,
         }
 
         /* Set logio VOL */
-        hdf5_info->vlid = H5VLregister_connector(&H5VL_log_g, H5P_DEFAULT); 
+        hdf5_info->vlid = vlid; 
         H5Pset_all_coll_metadata_ops(fapl_id, 1);   
         H5Pset_vol(fapl_id, hdf5_info->vlid, NULL);   
     }
